@@ -7,7 +7,7 @@
 
   const productos = ref([])
   const producto = reactive({
-    Codigo: null,
+    id: null,
     Descripcion: '',
     Stock: '',
     Precio: '',
@@ -29,11 +29,11 @@
   })
 
   const guardarProducto = () => {
-    if (producto.Codigo) {
-      const index = productos.value.findIndex((producto) => producto.Codigo === producto.Codigo)
+    if (producto.id) {
+      const index = productos.value.findIndex((producto) => producto.id === producto.id)
       productos.value[index] = { ...producto }
     } else {
-      productos.value.push({ ...producto, Codigo: uid() })
+      productos.value.push({ ...producto, id: uid() })
     }
 
     Object.assign(producto, {
@@ -43,13 +43,13 @@
       Vencimiento: '',
       Creacion: '',
       Proveedor: '',
-      Codigo: null
+      id: null
     })
   }
 
-  const eliminarProducto = (Codigo) => {
+  const eliminarProducto = (id) => {
     if (confirm('¿Estás seguro de eliminar este producto de tu inventario?')) {
-      productos.value = productos.value.filter((producto) => producto.Codigo !== Codigo)
+      productos.value = productos.value.filter((producto) => producto.id !== id)
       Object.assign(producto, {
         Descripcion: '',
         Stock: '',
@@ -57,13 +57,13 @@
         Vencimiento: '',
         Creacion: '',
         Proveedor: '',
-        Codigo: null
+        id: null
     })
     }
   }
 
-  const actualizarProducto = (Codigo) => {
-    const productoEditar = producto.value.find((producto) => producto.Codigo === Codigo)
+  const actualizarProducto = (id) => {
+    const productoEditar = productos.value.find((producto) => producto.id === id)
     Object.assign(producto, productoEditar)
   }
 </script>
@@ -80,7 +80,7 @@
         v-model:Vencimiento="producto.Vencimiento"
         v-model:Creacion="producto.Creacion"
         v-model:Proveedor="producto.Proveedor"
-        :Codigo="producto.Codigo"
+        :id="producto.id"
         @guardar-producto="guardarProducto"
       />
 
@@ -94,7 +94,7 @@
           <Producto
             v-for="producto in productos"
             :producto="producto"
-            :key="producto.Codigo"
+            :key="producto.id"
             @eliminar-producto="eliminarProducto"
             @actualizar-producto="actualizarProducto"
           />

@@ -27,7 +27,7 @@ const props = defineProps({
     type: String,
     default: '',
   },
-  Codigo: {
+  id: {
     type: String,
     default: null,
   }
@@ -58,7 +58,7 @@ const handleSubmit = (e) => {
 
   emits('guardar-producto')
 
-  alerta.mensaje = `Producto ${props.Codigo ? 'editado' : 'creado'} correctamente`
+  alerta.mensaje = `Producto ${props.id ? 'editado' : 'creado'} correctamente`
   alerta.tipo = 'exito'
 
   if (alerta.mensaje) {
@@ -72,7 +72,7 @@ const handleSubmit = (e) => {
 
 <template>
   <div class="md:w-1/2">
-    <h2 class="font-black text-3xl text-center">Seguimiento Pacientes</h2>
+    <h2 class="font-black text-3xl text-center">Control de Inventario</h2>
     <p class="text-lg mt-5 text-center mb-10">
       Añade productos al <span class="text-indigo-600 font-bold">Inventario</span>
     </p>
@@ -153,9 +153,9 @@ const handleSubmit = (e) => {
       </div>
       <button
         type="submit"
-        class="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-md w-full mt-5 transition-all uppercase"
+        class="bg-purple-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-md w-full mt-5 transition-all uppercase"
       >
-        {{ Codigo ? 'Editar Producto' : 'Agregar Producto' }}
+        {{ id ? 'Editar Producto' : 'Agregar Producto' }}
       </button>
     </form>
   </div>
